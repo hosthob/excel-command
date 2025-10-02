@@ -1,0 +1,15 @@
+#!/usr/bin/env php
+<?php
+require __DIR__ . '/../vendor/autoload.php';
+
+use Symfony\Component\Console\Application;
+use App\Command\ShowCsvCommand;
+use App\Service\CsvReader;
+
+$application = new Application('CSV CLI', '1.0.0');
+
+// Service aanmaken en injecteren in command
+$csvReader = new CsvReader();
+$application->add(new ShowCsvCommand($csvReader));
+
+$application->run();
