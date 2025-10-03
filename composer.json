@@ -3,7 +3,7 @@
     "description": "CSV processing with Symfony console commands",
     "autoload": {
         "psr-4": {
-            "App\\": "src/"
+            "App\\": "bin/src/"
         }
     },
     "authors": [

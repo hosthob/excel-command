@@ -13,18 +13,18 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 
 #[AsCommand(
     name: 'app:show-csv',
-    description: 'Display CSV file contents in a formatted table',
+    description: 'Display CSV file contents in a formatted table in the console ',
 )]
 class ShowCsvCommand extends Command
 {
     private CsvReader $csvReader;
-    private ?SymfonyStyle $io = null;
-    private ?string $filePath = null;
+    private ?SymfonyStyle $io;
+    private ?string $filePath;
     private int $limit = 10;
-    private bool $headersOnly = false;
-    private bool $countOnly = false;
-    private array $rows = [];
-    private array $headers = [];
+    private bool $headersOnly;
+    private bool $countOnly;
+    private array $rows ;
+    private array $headers;
 
     public function __construct(CsvReader $csvReader)
     {
@@ -118,7 +118,7 @@ class ShowCsvCommand extends Command
         if (!empty($this->rows)) {
             $table->setHeaders($this->rows[0]);
             
-            // Add data rows (skip first row as it's headers)
+            // Add data rows (skip first row as it's headers of the csv)
             for ($i = 1; $i < count($this->rows); $i++) {
                 $table->addRow($this->rows[$i]);
             }
