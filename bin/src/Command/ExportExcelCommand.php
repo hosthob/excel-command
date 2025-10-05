@@ -46,7 +46,7 @@ class ExportExcelCommand extends Command
 
         try {
             $this->excelExporter->exportWithChart($csv, $outputXlsx, $categoryCol, $valueCol);
-            $this->io->success("Excel written with chart: {$outputXlsx}");
+            $this->io->success("Excel written with  a chart: {$outputXlsx}");
             return Command::SUCCESS;
         } catch (\Throwable $e) {
             $this->io->error($e->getMessage());

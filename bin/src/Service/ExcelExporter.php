@@ -5,6 +5,7 @@ namespace App\Service;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
+use PhpOffice\PhpSpreadsheet\Cell\Coordinate;
 use PhpOffice\PhpSpreadsheet\Chart\Chart;
 use PhpOffice\PhpSpreadsheet\Chart\Legend;
 use PhpOffice\PhpSpreadsheet\Chart\PlotArea;
@@ -12,6 +13,7 @@ use PhpOffice\PhpSpreadsheet\Chart\Title;
 use PhpOffice\PhpSpreadsheet\Chart\DataSeries;
 use PhpOffice\PhpSpreadsheet\Chart\DataSeriesValues;
 
+// Export the data from the csv file to an excel file with a chart
 class ExcelExporter
 {
     private CsvReader $csvReader;
@@ -35,16 +37,17 @@ class ExcelExporter
         // read the csv file and get the rows
         $this->rows = $this->csvReader->read($csvPath);
         if (empty($this->rows)) {
-            throw new \RuntimeException('CSV is empty, nothing to export.');
+            throw new \RuntimeException('CSV is empty');
         }
 
         // set the category and value columns (auto-detect by header if possible)
         $headers = $this->rows[0];
         $detectedCategory = $this->detectColumnIndex($headers, ['name']);
-        $detectedValue = $this->detectColumnIndex($headers, ['income', 'amount', 'salary', 'value']);
+        // Prefer 'income' for values; fall back to common synonyms
+        $detectedValue = $this->detectColumnIndex($headers, ['Income', 'salary']);
 
         $this->categoryCol = $categoryCol ?? ($detectedCategory ?: 1);
-        $this->valueCol = $valueCol ?? ($detectedValue ?: 2);
+        $this->valueCol = $valueCol ?? ($detectedValue ?: 5);
 
         // create a new spreadsheet
         $this->spreadsheet = new Spreadsheet();
@@ -56,7 +59,7 @@ class ExcelExporter
         foreach ($this->rows as $row) {
             $colIndex = 1;
             foreach ($row as $cell) {
-                $cellAddress = $this->columnIndexToLetter($colIndex) . $rowIndex;
+                $cellAddress = Coordinate::stringFromColumnIndex($colIndex) . $rowIndex;
                 $this->sheet->setCellValue($cellAddress, $cell);
                 $colIndex++;
             }
@@ -66,22 +69,26 @@ class ExcelExporter
         $this->rowCount = count($this->rows);
 
         // Build chart ranges (A2:A{n} for categories; B2:B{n} for values by default)
-        $categoryColLetter = $this->columnIndexToLetter($this->categoryCol);
-        $valueColLetter = $this->columnIndexToLetter($this->valueCol);
+        $categoryColLetter = Coordinate::stringFromColumnIndex($this->categoryCol);
+        $valueColLetter = Coordinate::stringFromColumnIndex($this->valueCol);
         $categoryRange = 'Data!$' . $categoryColLetter . '$2:$' . $categoryColLetter . '$' . $this->rowCount;
         $valueRange = 'Data!$' . $valueColLetter . '$2:$' . $valueColLetter . '$' . $this->rowCount;
 
         $seriesLabelRef = 'Data!$' . $valueColLetter . '$1';
+        //Labels 
         $seriesLabels = [
             new DataSeriesValues('String', $seriesLabelRef, null, 1),
         ];
+        // X-axis tick values 
         $xAxisTickValues = [
             new DataSeriesValues('String', $categoryRange, null, $this->rowCount - 1),
         ];
+        // Y-axis tick values
         $dataSeriesValues = [
             new DataSeriesValues('Number', $valueRange, null, $this->rowCount - 1),
         ];
 
+        // Data series values 
         $series = new DataSeries(
             DataSeries::TYPE_BARCHART, // Column/bar chart
             DataSeries::GROUPING_CLUSTERED,
@@ -123,17 +130,6 @@ class ExcelExporter
         $writer = new Xlsx($this->spreadsheet);
         $writer->setIncludeCharts(true);
         $writer->save($outputXlsx);
-    }
-
-    private function columnIndexToLetter(int $index): string
-    {
-        $letter = '';
-        while ($index > 0) {
-            $index--;
-            $letter = chr(65 + ($index % 26)) . $letter;
-            $index = intdiv($index, 26);
-        }
-        return $letter;
     }
 
     private function detectColumnIndex(array $headers, array $candidates): ?int
