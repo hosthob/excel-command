@@ -17,6 +17,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 )]
 class ShowCsvCommand extends Command
 {
+      
     private CsvReader $csvReader;
     private ?SymfonyStyle $io;
     private ?string $filePath;

@@ -4,7 +4,7 @@ namespace App\Service;
 
 /**
  * Service class for reading and processing CSV files
- * Handles file operations and provides utility methods for CSV data
+ * Handles file operations
  */
 class CsvReader
 {
