@@ -23,6 +23,7 @@ class ShowCsvCommand extends Command
     private int $limit = 10;
     private bool $headersOnly;
     private bool $countOnly;
+    private bool $highestIncome;
     private array $rows ;
     private array $headers;
 
@@ -39,6 +40,7 @@ class ShowCsvCommand extends Command
             ->addOption('limit', 'l', InputOption::VALUE_OPTIONAL, 'Limit number of rows to display', 10)
             ->addOption('headers', null, InputOption::VALUE_NONE, 'Show only headers')
             ->addOption('count', 'c', InputOption::VALUE_NONE, 'Show only row count')
+            ->addOption('highest-income', null, InputOption::VALUE_NONE, 'Show the highest income value')
         ;
     }
 
@@ -53,6 +55,10 @@ class ShowCsvCommand extends Command
 
             if ($this->headersOnly) {
                 return $this->showHeaders();
+            }
+
+            if ($this->highestIncome) {
+                return $this->showHighestIncome();
             }
 
             return $this->showCsvTable();
@@ -70,6 +76,7 @@ class ShowCsvCommand extends Command
         $this->limit = (int) $input->getOption('limit');
         $this->headersOnly = $input->getOption('headers');
         $this->countOnly = $input->getOption('count');
+        $this->highestIncome = $input->getOption('highest-income');
     }
 
     private function showRowCount(): int
@@ -84,6 +91,43 @@ class ShowCsvCommand extends Command
         $this->headers = $this->csvReader->getHeaders($this->filePath);
         $this->io->title('CSV Headers');
         $this->io->listing($this->headers);
+        return Command::SUCCESS;
+    }
+
+    private function showHighestIncome(): int
+    {
+        // show the highest income in the csv file
+        $headers = $this->csvReader->getHeaders($this->filePath);
+        $incomeIndex = array_search('Income', $headers);
+        
+        if ($incomeIndex === false) {
+            $this->io->error('Income column not found in CSV file');
+            return Command::FAILURE;
+        }
+        
+        $this->rows = $this->csvReader->read($this->filePath);
+        
+        if (empty($this->rows) || count($this->rows) <= 1) {
+            $this->io->warning('No data rows found in CSV file');
+            return Command::SUCCESS;
+        }
+        
+        // Skip header row and get income values
+        $incomeValues = [];
+        for ($i = 1; $i < count($this->rows); $i++) {
+            if (isset($this->rows[$i][$incomeIndex]) && is_numeric($this->rows[$i][$incomeIndex])) {
+                $incomeValues[] = (float) $this->rows[$i][$incomeIndex];
+            }
+        }
+        
+        if (empty($incomeValues)) {
+            $this->io->warning('No valid income values found in CSV file');
+            return Command::SUCCESS;
+        }
+        
+        $highestIncome = max($incomeValues);
+        $this->io->title('Highest Income');
+        $this->io->success("Highest income: $" . number_format($highestIncome, 2));
         return Command::SUCCESS;
     }
 

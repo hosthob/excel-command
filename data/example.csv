@@ -1,6 +1,61 @@
-Name,Age,City,Country
-John Doe,25,Amsterdam,Netherlands
-Jane Smith,30,Rotterdam,Netherlands
-Bob Johnson,35,Utrecht,Netherlands
-Alice Brown,28,Eindhoven,Netherlands
-Charlie Wilson,32,The Hague,Netherlands
+Name,Age,City,Country,Income,Profession,Married,Gender
+John Doe,25,Amsterdam,Netherlands,30000,Software Developer,Yes,Man
+Sarah Johnson,32,New York,USA,75000,Marketing Manager,No,Woman
+Ahmed Hassan,28,Dubai,UAE,55000,Data Analyst,Yes,Man
+Maria Rodriguez,29,Barcelona,Spain,42000,Graphic Designer,No,Woman
+David Chen,35,Tokyo,Japan,68000,Product Manager,Yes,Man
+Emma Thompson,27,London,UK,48000,UX Designer,No,Woman
+Michael Brown,31,Sydney,Australia,62000,DevOps Engineer,Yes,Man
+Lisa Wang,26,Singapore,Singapore,51000,Business Analyst,No,Woman
+Oliver Schmidt,33,Berlin,Germany,59000,Software Architect,Yes,Man
+Sophie Martin,24,Paris,France,38000,Junior Developer,No,Woman
+Raj Patel,30,Mumbai,India,45000,QA Engineer,Yes,Man
+Ana Silva,29,São Paulo,Brazil,41000,Digital Marketing Specialist,No,Woman
+James Wilson,36,Toronto,Canada,71000,Sales Director,Yes,Man
+Yuki Tanaka,28,Osaka,Japan,54000,UI Designer,No,Woman
+Carlos Mendez,32,Mexico City,Mexico,47000,Project Manager,Yes,Man
+Alexander Thompson,29,Stockholm,Sweden,53000,Frontend Developer,No,Man
+Isabella Garcia,26,Madrid,Spain,43000,Content Writer,Yes,Woman
+Mohammed Al-Rashid,31,Riyadh,Saudi Arabia,61000,System Administrator,Yes,Man
+Elena Petrov,27,Moscow,Russia,39000,Translator,No,Woman
+Daniel Kim,34,Seoul,South Korea,67000,Technical Lead,Yes,Man
+Claire Dubois,25,Lyon,France,36000,Junior Designer,No,Woman
+Roberto Silva,30,Lisbon,Portugal,44000,Backend Developer,Yes,Man
+Amara Okafor,28,Lagos,Nigeria,42000,Digital Marketing,No,Woman
+Hiroshi Yamamoto,35,Tokyo,Japan,72000,Senior Developer,Yes,Man
+Victoria Clarke,29,Dublin,Ireland,49000,Product Owner,No,Woman
+Andreas Mueller,32,Vienna,Austria,58000,Database Administrator,Yes,Man
+Fatima Al-Zahra,26,Cairo,Egypt,38000,UI/UX Designer,No,Woman
+Sebastian Lopez,31,Buenos Aires,Argentina,47000,DevOps Engineer,Yes,Man
+Nina Johansson,27,Copenhagen,Denmark,51000,Scrum Master,No,Woman
+Lucas Fernandes,29,Rio de Janeiro,Brazil,45000,QA Tester,Yes,Man
+Aisha Patel,24,Delhi,India,35000,Junior Analyst,No,Woman
+Marcus Johnson,33,Chicago,USA,68000,Solution Architect,Yes,Man
+Zara Ahmed,28,Karachi,Pakistan,41000,Content Manager,No,Woman
+Nikolai Petrov,36,St. Petersburg,Russia,55000,Security Engineer,Yes,Man
+Maya Singh,25,Bangalore,India,40000,Junior Developer,No,Woman
+Giuseppe Romano,30,Rome,Italy,48000,Full Stack Developer,Yes,Man
+Sofia Andersson,27,Gothenburg,Sweden,46000,UX Researcher,No,Woman
+Ahmed Benali,32,Algiers,Algeria,43000,Network Engineer,Yes,Man
+Emma O'Connor,26,Cork,Ireland,38000,Marketing Coordinator,No,Woman
+Diego Martinez,29,Santiago,Chile,45000,Mobile Developer,Yes,Man
+Anna Kowalski,28,Warsaw,Poland,42000,Data Scientist,No,Woman
+Omar Hassan,31,Casablanca,Morocco,47000,Cloud Engineer,Yes,Man
+Chloe Williams,25,Manchester,UK,39000,Junior Designer,No,Woman
+Rafael Santos,33,São Paulo,Brazil,58000,Technical Manager,Yes,Man
+Priya Sharma,27,Mumbai,India,44000,Business Intelligence,No,Woman
+Alexei Volkov,30,Kiev,Ukraine,41000,Software Engineer,Yes,Man
+Grace Murphy,26,Belfast,UK,37000,Content Creator,No,Woman
+Hassan Al-Mahmoud,34,Doha,Qatar,65000,IT Director,Yes,Man
+Maya Chen,24,Hong Kong,Hong Kong,40000,Junior Developer,No,Woman
+Luca Bianchi,29,Milan,Italy,49000,Frontend Lead,Yes,Man
+Freya Nielsen,27,Oslo,Norway,52000,Product Designer,No,Woman
+Karim El-Masri,32,Alexandria,Egypt,46000,Backend Developer,Yes,Man
+Ruby Taylor,25,Melbourne,Australia,43000,Digital Strategist,No,Woman
+Pavel Novak,31,Prague,Czech Republic,50000,DevOps Specialist,Yes,Man
+Luna Rodriguez,28,Valencia,Spain,42000,UX Designer,No,Woman
+Tariq Al-Mansouri,29,Abu Dhabi,UAE,54000,Senior Developer,Yes,Man
+Scarlett Brown,26,Perth,Australia,40000,Junior Analyst,No,Woman
+Viktor Popov,35,Sofia,Bulgaria,48000,Technical Lead,Yes,Man
+Hazel Green,24,Bristol,UK,36000,Content Writer,No,Woman
+Youssef Benali,30,Tunis,Tunisia,44000,Software Developer,Yes,Man
