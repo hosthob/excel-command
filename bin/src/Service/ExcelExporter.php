@@ -37,7 +37,7 @@ class ExcelExporter
         // read the csv file and get the rows
         $this->rows = $this->csvReader->read($csvPath);
         if (empty($this->rows)) {
-            throw new \RuntimeException('CSV is empty');
+            throw new \RuntimeException('CSV is empty please check the file path and the file is not empty');
         }
 
         // set the category and value columns (auto-detect by header if possible)
